@@ -10,3 +10,5 @@ out/
 .env.local
 .yarn
 .yarnrc.yml
+.pnp.cjs
+.pnp.loader.mjs
