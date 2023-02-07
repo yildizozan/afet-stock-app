@@ -79,7 +79,7 @@ function getDatas(): Map<string, number> {
 const handler = (req: NextApiRequest, res: NextApiResponse) => {
   res.setHeader('Content-Type', 'application/json')
 
-  if (req.headers.dev != 'true') {
+  if (req.headers.dev == 'true') {
     res.json({ data: Object.fromEntries(getDatas()) })
     return
   }
