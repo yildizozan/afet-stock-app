@@ -1,7 +1,5 @@
 import {NextApiRequest, NextApiResponse} from "next";
-import pool from "./dbConfig";
-
-
+import pool from "../../configs/dbConfig";
 function getStocks(req, res) : void{
     const queryText = `
     SELECT *
@@ -63,27 +61,42 @@ function updateStock( req, res): void{
             console.error(err.stack);
         });
 }
+
+function getDatas() : Map<string,number >{
+    // Get data from another resource
+    let map = new Map<string, number>();
+    map.set("Isıtıcı", 100);
+    map.set("Mont", 200);
+    map.set("Yagmurluk", 300);
+    map.set("Bot", 200);
+    return map;
+}
+
 const handler = (req: NextApiRequest, res: NextApiResponse) => {
     res.setHeader("Content-Type", "application/json")
 
-    switch(req.method){
-        case "GET":
-            getStocks(req, res);
-            break;
-        case "POST":
-            addStock(req, res);
-            break;
-        case "PUT":
-            updateStock(req, res);
-            break;
-        case "DELETE":
-            reduceStock(req , res);
-            break;
-        default:
-            res.status(405).end();
-            break;
-    }
+    if(req.headers.dev != "true") {
 
+        switch (req.method) {
+            case "GET":
+                getStocks(req, res);
+                break;
+            case "POST":
+                addStock(req, res);
+                break;
+            case "PUT":
+                updateStock(req, res);
+                break;
+            case "DELETE":
+                reduceStock(req, res);
+                break;
+            default:
+                res.status(405).end();
+                break;
+        }
+    }else{
+        res.json({"data" : Object.fromEntries(getDatas())});
+    }
 }
 
 export default handler;
