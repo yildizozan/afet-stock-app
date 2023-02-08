@@ -1,6 +1,7 @@
-type Item = {
-  type: string
-  value: number
+import Requirement from './requirement'
+
+type Item = Requirement & {
+  stock: number
 }
 
 export default Item
