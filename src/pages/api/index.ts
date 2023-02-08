@@ -59,10 +59,8 @@ function getDatas(): Item[] {
 const handler = (req: NextApiRequest, res: NextApiResponse) => {
   res.setHeader('Content-Type', 'application/json')
 
-  if (req.headers.dev == 'true') {
-    res.json({ data: getDatas() })
-    return
-  }
+  res.json({ data: getDatas() })
+  return
 
   switch (req.method) {
     case 'GET':
