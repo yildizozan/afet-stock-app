@@ -1,5 +1,6 @@
 import NextDocument, { Html, Head, Main, NextScript } from 'next/document'
-import Header from '../components/header'
+import Navbar from '../components/navbar'
+import app from '../configs/firestoreConfig'
 
 export default class MyDocument extends NextDocument {
   static getInitialProps(ctx) {
@@ -16,7 +17,7 @@ export default class MyDocument extends NextDocument {
         </Head>
 
         <body>
-          <Header />
+          <Navbar />
           <Main />
           <NextScript />
         </body>
